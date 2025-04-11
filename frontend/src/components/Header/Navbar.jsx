@@ -1,8 +1,5 @@
-import React from "react";
-import logoDark from "../../assets/logo/blacklogo.png";
-import logoLight from "../../assets/logo/whitelogo.png";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,20 +11,41 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useTheme } from "../../context/ThemeProvider";
-import { Moon, Sun, Search, SquarePen } from "lucide-react";
+import { Share, SquarePen } from "lucide-react";
 import { getNameInitials } from "../../utils/stringUtil";
 import { useAuth } from "@/context/AuthContext";
 import { Skeleton } from "../ui/skeleton";
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
   const { user, loading, logout } = useAuth();
-
   const navigate = useNavigate();
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  // Add the Google Fonts import for Poppins
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    
+    const fontAwesome = document.createElement('link');
+    fontAwesome.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
+    fontAwesome.rel = "stylesheet";
+    document.head.appendChild(fontAwesome);
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        font-family: 'Poppins', sans-serif;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(fontAwesome);
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const ScrollToTop = () => {
     window.scrollTo({
@@ -38,43 +56,69 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between p-5 sticky top-0 z-10 md:px-[60px] lg:px-[120px] lg:py-5 bg-white shadow-md dark:bg-neutral-900">
-        <div className="flex items-center justify-center w-32 md:w-44 lg:w-52">
-          <Link to="/" onClick={ScrollToTop}>
-            <img src={theme === "light" ? logoDark : logoLight} alt="Logo" />
+      <nav className="flex items-center justify-between p-5 sticky top-0 z-10 md:px-[60px] lg:px-[120px] lg:py-5 bg-[#ff7f00] text-white shadow-md font-poppins">
+        <div className="flex items-center justify-center">
+          <Link to="/" onClick={ScrollToTop} className="logo flex items-center font-bold text-2xl">
+            <i className="fas fa-heartbeat text-white text-3xl mr-2"></i>
+            <span className="RC text-2xl font-bold">RURALCARE</span>
           </Link>
         </div>
-        {/* For desktop */}
-        <div className="hidden lg:flex flex-1 justify-center">
-          <SearchBar />
+        
+        {/* Navigation Menu - Visible on Desktop */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <nav className="hidden md:block">
+            <ul className="flex">
+              {[
+                { name: 'HOME', path: '/', active: true },
+                { name: 'SERVICES', path: '/services', active: false },
+                { name: 'BLOGS', path: '/blogs', active: true },
+                { name: 'CONTACT', path: '/contact', active: false },
+                { name: 'ABOUT', path: '/about', active: false }
+              ].map((item, index) => (
+                <li key={index} className={`mx-4 relative ${item.active ? 'font-semibold' : ''}`}>
+                  <Link 
+                    to={item.path}
+                    onClick={ScrollToTop}
+                    className="text-white no-underline font-medium transition-all duration-300 text-sm py-2 px-1 block hover:text-amber-50 hover:translate-y-px group"
+                  >
+                    {item.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out group-hover:w-full" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <div className="flex items-center space-x-6">
-          {/* For Mobile */}
+          {/* Search Dropdown for Mobile */}
           <div className="lg:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Search />
+                {/* <Search /> */}
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <SearchBar />
+                {/* <SearchBar /> */}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
 
+          {/* Write Button - Only for logged in users */}
           {user && (
             <div className="hidden lg:flex items-center space-x-4">
-              <Link to="/write" onClick={ScrollToTop} className="flex gap-2">
+              <Link to="/write" onClick={ScrollToTop} className="flex gap-2 text-white hover:text-amber-50 font-medium">
                 <SquarePen strokeWidth={1.5} />
                 Write
               </Link>
             </div>
           )}
 
-          <div onClick={toggleTheme} className="cursor-pointer">
-            {theme === "dark" ? <Sun className="dark:text-white" /> : <Moon />}
-          </div>
+          {/* Share Button
+          <button className="bg-white bg-opacity-20 border-none w-9 h-9 rounded-full flex items-center justify-center text-white cursor-pointer transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
+            <Share size={18} />
+          </button> */}
 
+          {/* User Authentication */}
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -87,16 +131,16 @@ const Navbar = () => {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel className="font-medium">My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <Link to="/dashboard">
-                    <DropdownMenuItem onClick={ScrollToTop}>
+                    <DropdownMenuItem onClick={ScrollToTop} className="font-normal">
                       Dashboard
                     </DropdownMenuItem>
                   </Link>
                   <Link to="/profile">
-                    <DropdownMenuItem onClick={ScrollToTop}>
+                    <DropdownMenuItem onClick={ScrollToTop} className="font-normal">
                       Profile
                     </DropdownMenuItem>
                   </Link>
@@ -106,6 +150,7 @@ const Navbar = () => {
                   onClick={() => {
                     logout();
                   }}
+                  className="font-normal"
                 >
                   Logout
                 </DropdownMenuItem>
@@ -114,13 +159,9 @@ const Navbar = () => {
           ) : loading ? (
             <Skeleton className="h-7 w-7 md:h-9 md:w-9 rounded-full" />
           ) : (
-            <Link
-              to="/login"
-              onClick={ScrollToTop}
-              className="text-lg text-primary-500 dark:text-primary-400"
-            >
-              Login
-            </Link>
+            <button onClick={() => navigate('/login')} className="bg-white text-orange-500 border-none py-2 px-5 rounded-lg font-bold cursor-pointer transition-all duration-300 hover:bg-gray-100 hover:-translate-y-0.5">
+              LOGIN
+            </button>
           )}
         </div>
       </nav>

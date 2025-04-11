@@ -5,34 +5,34 @@ const Sidebar = () => {
   const categories = [
     {
       id: 1,
-      name: "Fashion",
+      name: "Preventive Healthcare",
     },
     {
       id: 2,
-      name: "Technology",
+      name: "Women's Health",
     },
     {
       id: 3,
-      name: "Food",
+      name: "Child Health",
     },
     {
       id: 4,
-      name: "AI",
+      name: "Mental Health",
     },
     {
       id: 5,
-      name: "Travel",
+      name: "Common Diseases & Conditions",
     },
     {
       id: 6,
-      name: "Coding",
+      name: "Nutrition & Diet",
     },
   ];
 
   return (
     <>
       <div>
-        <h2 className="text-2xl font-bold mb-8">Stories from all interests</h2>
+        <h2 className="text-2xl font-bold mb-8">Information from all fields</h2>
         {categories.map((data) => (
           <div key={data.id}>
             <Link to={`/category/${data.name}`}>
