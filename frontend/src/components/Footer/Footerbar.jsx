@@ -74,14 +74,12 @@ const Footerbar = () => {
             </ul>
           </div>
 
-          <div className="text-xl font-bold">
-            <h2>Download Official App</h2>
-          </div>
+          
         </div>
 
         <div className="py-4">
           <p className="text-sm text-gray-500 text-center dark:text-gray-400">
-            © {getCurrentYear()} Postopia. All Rights Reserved | Designed and
+            © {getCurrentYear()} RURALCARE. All Rights Reserved | Designed and
             developed by{" "}
             <a
               href="https://github.com/kritikhedau"
@@ -89,16 +87,16 @@ const Footerbar = () => {
               rel="noreferrer"
               style={{ color: "#1d40af", textDecoration: "none" }}
             >
-              Kritik Hedau
+              HCK042
             </a>{" "}
-            and{" "}
+            {" "}
             <a
               href="https://github.com/shakti177"
               target="_blank"
               rel="noreferrer"
               style={{ color: "#1d40af", textDecoration: "none" }}
             >
-              Shakti Tamrakar
+              (Runtime-Terrors)
             </a>{" "}
             with ❤️
           </p>

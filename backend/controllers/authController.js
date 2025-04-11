@@ -150,7 +150,7 @@ module.exports.logoutUser = async (req, res) => {
       });
     }
 
-    const decoded = jwt.verify(refreshToken, process.env.REFRESH_JWT_KEY);
+    const decoded = jwt.verify(refreshToken, "zxczxcxzCzxczxczxczxc");
 
     const user = await userModel.findById(decoded.id);
     if (!user) {
@@ -297,7 +297,7 @@ module.exports.refreshToken = async (req, res) => {
   }
 
   try {
-    const decoded = jwt.verify(refreshToken, process.env.REFRESH_JWT_KEY);
+    const decoded = jwt.verify(refreshToken, "zxczxcxzCzxczxczxczxc");
 
     const user = await userModel.findById(decoded.id);
     if (!user || !user.refreshTokens.includes(refreshToken)) {
@@ -311,7 +311,7 @@ module.exports.refreshToken = async (req, res) => {
     let currentRefreshToken = refreshToken;
 
     try {
-      jwt.verify(refreshToken, process.env.REFRESH_JWT_KEY);
+      jwt.verify(refreshToken, "zxczxcxzCzxczxczxczxc");
     } catch (error) {
       if (error.name === "TokenExpiredError") {
         const { refreshToken: generatedRefreshToken } = generateToken(user);
