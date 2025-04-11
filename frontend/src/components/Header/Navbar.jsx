@@ -69,9 +69,9 @@ const Navbar = () => {
           <nav className="hidden md:block">
             <ul className="flex">
               {[
-                { name: 'HOME', path: '/', active: true },
+                { name: 'HOME', path: '/blogs', active: true },
                 { name: 'SERVICES', path: '/services', active: false },
-                { name: 'BLOGS', path: '/blogs', active: true },
+                { name: 'BLOGS', path: '/', active: false },
                 { name: 'CONTACT', path: '/contact', active: false },
                 { name: 'ABOUT', path: '/about', active: false }
               ].map((item, index) => (
@@ -91,17 +91,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-6">
-          {/* Search Dropdown for Mobile */}
-          <div className="lg:hidden">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                {/* <Search /> */}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                {/* <SearchBar /> */}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
 
           {/* Write Button - Only for logged in users */}
           {user && (
@@ -112,11 +101,6 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-
-          {/* Share Button
-          <button className="bg-white bg-opacity-20 border-none w-9 h-9 rounded-full flex items-center justify-center text-white cursor-pointer transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
-            <Share size={18} />
-          </button> */}
 
           {/* User Authentication */}
           {user ? (
