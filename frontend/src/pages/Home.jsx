@@ -58,7 +58,7 @@ const Home = () => {
                       <div className="w-20 h-20 md:w-32 md:h-32 bg-gray-200 dark:bg-neutral-800 rounded-lg"></div>
                     </div>
                   ))
-              : posts.map((post) => (
+              : posts?.map((post) => (
                   <div
                     key={post._id}
                     className="border-b grid grid-cols-1 md:grid-cols-[70%_25%] items-center justify-between pb-6 mb-6"

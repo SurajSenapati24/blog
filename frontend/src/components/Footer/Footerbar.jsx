@@ -18,7 +18,7 @@ const Footerbar = () => {
     });
   };
 
-  const recentPosts = posts.slice(0, 3);
+  const recentPosts = posts?.slice(0, 3);
 
   return (
     <>
@@ -38,7 +38,7 @@ const Footerbar = () => {
           <div>
             <h2 className="text-xl font-bold">Recent Posts</h2>
             <ul className="py-2">
-              {recentPosts.map((item) => (
+              {recentPosts?.map((item) => (
                 <li className="py-1" key={item._id} onClick={ScrollToTop}>
                   <Link to={`/blog/${item._id}`}>
                     <p className="line-clamp-2">{item.title}</p>
