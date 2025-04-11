@@ -130,12 +130,12 @@ const Write = () => {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Categories</SelectLabel>
-                          <SelectItem value="AI">AI</SelectItem>
-                          <SelectItem value="Coding">Coding</SelectItem>
-                          <SelectItem value="Fashion">Fashion</SelectItem>
-                          <SelectItem value="Food">Food</SelectItem>
-                          <SelectItem value="Technology">Technology</SelectItem>
-                          <SelectItem value="Travel">Travel</SelectItem>
+                          <SelectItem value="PH">Preventive Healthcare</SelectItem>
+                          <SelectItem value="Women's Health">Women's Health</SelectItem>
+                          <SelectItem value="CH">Child Health</SelectItem>
+                          <SelectItem value="MH">Mental Health</SelectItem>
+                          <SelectItem value="CDC">Common Diseases & Condtions</SelectItem>
+                          <SelectItem value="ND">Nutrition & Diet</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

@@ -54,22 +54,22 @@ const Footerbar = () => {
             <h2 className="text-xl font-bold">Categories</h2>
             <ul className="py-2" onClick={ScrollToTop}>
               <li className="py-1">
-                <Link to={`/category/Fashion`}>Preventive Healthcare</Link>
+                <Link to={`/category/PH`}>Preventive Healthcare</Link>
               </li>
               <li className="py-1">
-                <Link to={`/category/Technology`}>Women's Health</Link>
+                <Link to={`/category/WH`}>Women's Health</Link>
               </li>
               <li className="py-1">
-                <Link to={`/category/Food`}>Child Health</Link>
+                <Link to={`/category/CH`}>Child Health</Link>
               </li>
               <li className="py-1">
-                <Link to={`/category/AI`}>Mental Health</Link>
+                <Link to={`/category/MH`}>Mental Health</Link>
               </li>
               <li className="py-1">
-                <Link to={`/category/Travel`}>Common Diseases & Conditions</Link>
+                <Link to={`/category/CDC`}>Common Diseases & Conditions</Link>
               </li>
               <li className="py-1">
-                <Link to={`/category/Coding`}>Nutrition & Diet</Link>
+                <Link to={`/category/ND`}>Nutrition & Diet</Link>
               </li>
             </ul>
           </div>
